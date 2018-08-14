@@ -8,6 +8,24 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /*private $sender;
+
+    public function __construct(MailSender $sender)
+    {
+        $this->sender = $sender;
+    }
+
+    public function makeOrder($data)
+    {
+        $this->storeOrder($data);
+
+        $this->sendConfirmationsMail($data);
+    }*/
+
+    private function sendConfirmationsMail($data) {
+        $this->sender->sendEmail($data['email'], $data);
+    }
+
     public function index()
     {
         return response()->json(Order::with(['product'])->get(),200);
