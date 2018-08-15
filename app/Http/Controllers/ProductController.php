@@ -36,10 +36,13 @@ class ProductController extends Controller
 
     public function uploadFile(Request $request)
     {
+        $name = '';
+//        return $request->file('image');
         if($request->hasFile('image')){
             $name = time()."_".$request->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path('images'), $name);
         }
+//        return $request->file('image')->getClientOriginalName();
         return response()->json(asset("images/$name"),201);
     }
 
